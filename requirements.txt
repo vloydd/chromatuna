@@ -1,0 +1,5 @@
+customtkinter==5.2.2
+numpy==1.26.3
+sounddevice==0.4.6
+scipy==1.11.4
+soundfile==0.12.1

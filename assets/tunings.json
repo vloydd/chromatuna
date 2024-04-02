@@ -1,0 +1,109 @@
+{
+  "guitar": {
+    "standard": [{
+      "name": "Standard Tuning: EADGBE",
+      "tuning": {
+        "E2": 82.4,
+        "A2": 110.0,
+        "D3": 146.8,
+        "G3": 196.0,
+        "B3": 246.9,
+        "E4": 329.6
+      }
+    }],
+    "drop_d": [{
+      "name": "Drop D: DADGBE",
+      "tuning": {
+        "D2": 73.4,
+        "A2": 110.0,
+        "D3": 146.8,
+        "G3": 196.0,
+        "B3": 246.9,
+        "E4": 329.6
+      }
+    }],
+    "open_g": [{
+      "name": "Open G: DGDGBD",
+      "tuning": {
+        "D2": 73.4,
+        "G2": 98.0,
+        "D3": 146.8,
+        "G3": 196.0,
+        "B3": 246.9,
+        "D4": 293.7
+      }
+    }]
+  },
+  "bass": {
+    "standard": [{
+      "name" : "Standard Tuning: EADG",
+      "tuning": {
+        "E1": 41.2,
+        "A1": 55.0,
+        "D2": 73.4,
+        "G2": 98.0
+      }
+    }],
+    "drop_d": [{
+      "name" : "Drop D: DADG",
+      "tuning": {
+        "D1": 36.7,
+        "A1": 55.0,
+        "D2": 73.4,
+        "G2": 98.0
+      }
+    }],
+    "standard_5_string": [{
+      "name" : "Standard 5-String: BEADG",
+      "tuning": {
+        "B0": 30.9,
+        "E1": 41.2,
+        "A1": 55.0,
+        "D2": 73.4,
+        "G2": 98.0
+      }
+    }]
+  },
+  "violin": {
+    "standard": [{
+      "name": "Standard: GDAE",
+      "tuning": {
+        "G3": 196.0,
+        "D4": 293.7,
+        "A4": 440.0,
+        "E5": 659.3
+      }
+    }]
+  },
+  "cello": {
+    "standard": [{
+      "name": "Standard: CGDA",
+      "tuning": {
+        "C2": 65.4,
+        "G2": 98.0,
+        "D3": 146.8,
+        "A3": 220.0
+      }
+    }]
+  },
+  "ukulele": {
+    "standard": [{
+      "name": "Standard: G4C4E4A4",
+      "tuning": {
+        "G4": 392.0,
+        "C4": 261.6,
+        "E4": 329.6,
+        "A4": 440.0
+      }
+    }],
+    "low_g": [{
+      "name": "Low G: G3C4E4A4",
+      "tuning": {
+        "G3": 196.0,
+        "C4": 261.6,
+        "E4": 329.6,
+        "A4": 440.0
+      }
+    }]
+  }
+}

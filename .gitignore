@@ -1,0 +1,17 @@
+# Python
+*.pyc
+*.pyo
+__pycache__/
+*/__pycache__
+*.swp
+*.log
+
+# Dependency directories
+venv/
+env/
+
+# Distribution / packaging
+.idea
+.vscode
+dist/
+backups/
