@@ -3,3 +3,5 @@ numpy==1.26.3
 sounddevice==0.4.6
 scipy==1.11.4
 soundfile==0.12.1
+pillow~=10.2.0
+matplotlib~=3.8.2

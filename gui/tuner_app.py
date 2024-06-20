@@ -4,6 +4,8 @@ import json
 import tkinter as tk
 from tkinter import END
 import customtkinter as ctk
+import sounddevice as sd
+import soundfile as sf
 
 from core.sound_generator import SoundGenerator
 from core.chromatuna_engine import TunerEngine
@@ -41,12 +43,14 @@ class TunerApp:
 
     def setup_gui(self):
         self.master.title("Chromatuna")
-        self.master.geometry("500x400")
+        self.master.geometry("550x500")
         self.master.resizable(False, False)
+        self.master.iconbitmap("assets/chromatuna.ico")
+        # self.master.wm_attributes('-toolwindow', 'True')
 
         instrument_list = tk.Listbox(
             self.master,
-            font=("Verdana", 14),
+            font=("Cascadia Mono", 12),
             bg="#66B66E",
             selectmode=tk.SINGLE
         )
@@ -62,35 +66,60 @@ class TunerApp:
             self.master,
             text="Choose Tuning",
             command=self.select_tuning,
-            fg_color="#FF5B00",
-            hover_color="#FFA500",
-            font=("Verdana", 17),
+            width=150,
+            height=40,
+            fg_color="transparent",
+            hover_color="#FF5B00",
+            border_width=1,
+            border_color="#FF5B00",
+            corner_radius=20,
+            font=("Cascadia Mono", 11),
         )
-        tuning_button.pack(padx=10, pady=10)
-
+        start_tuning = ctk.CTkButton(
+            self.master,
+            text="Start Tuning",
+            command=self.chromatic_tuner.full_tuning,
+            width=150,
+            height=40,
+            fg_color="transparent",
+            hover_color="#66B66E",
+            border_width=1,
+            border_color="#66B66E",
+            corner_radius=50,
+            font=("Cascadia Mono", 14),
+        )
         chromatic_button = ctk.CTkButton(
             self.master,
             text="Chromatic Only",
             command=self.chromatic_tuner.chromatic_tuning,
-            fg_color="#FFA500",
-            hover_color="#FF5B00",
-            font=("Verdana", 17),
+            width=150,
+            height=40,
+            fg_color="transparent",
+            hover_color="#FFA500",
+            border_width=1,
+            corner_radius=50,
+            border_color="#FFA500",
+            font=("Cascadia Mono", 14),
         )
+
+        instrument_list.pack(expand=True, padx=5, pady=5)
+        tuning_button.pack(padx=10, pady=10)
+        start_tuning.pack(padx=10, pady=10)
         chromatic_button.pack(padx=10, pady=10)
 
     def select_tuning(self):
         print("Selecting tuning...")
         x, y = self.master.winfo_x(), self.master.winfo_y()
         top = TunerWindow(self.master, "Selecting tuning", "+%d+%d" % (x + 135, y + 75))
-        top.geometry("250x200")
+        top.geometry("350x300")
         top.overrideredirect(True)
-        top.config(bg="#66B", bd=5, relief=tk.RAISED)
+        top.config(bg="#242424", bd=5, relief=tk.RAISED, border=5)
         tunings = self.tunings[self.instrument]
-        listbox = tk.Listbox(top)
+        listbox = tk.Listbox(top, bg="#66B", font=("Cascadia Mono", 12), selectmode=tk.SINGLE)
         if tunings:
             for tuning in tunings.keys():
                 # insert tuning names into the listbox
-                listbox.insert(tk.END, tunings[tuning][0]['name'])
+                listbox.insert(END, tunings[tuning][0]['name'])
         listbox.selection_set(list(self.tunings[self.instrument]).index(self.tuning))
 
         def on_selection(event):
@@ -117,3 +146,9 @@ class TunerApp:
             self.instrument = selected_item.lower()
             self.tuning = 'standard'
             print("Selected instrument: " + selected_item)
+
+    def get_tuning_frequencies(self):
+        return list(self.tunings[self.instrument][self.tuning][0]['tuning'].values())
+
+    def get_tuning_keys(self):
+        list(self.tunings[self.instrument][self.tuning][0]['tuning'].keys())

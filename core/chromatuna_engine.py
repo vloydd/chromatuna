@@ -46,6 +46,10 @@ class TunerEngine:
                 return
 
             hann_samples = self.window_samples * self.hann_window
+            # save fft data for charts visualisation.
+            self.fft_data = np.abs(np.fft.rfft(hann_samples))
+            self.fft_freqs = np.fft.rfftfreq(len(hann_samples), 1 / self.sample_freq)
+
             magnitude_spec = abs(scipy.fftpack.fft(hann_samples)[:len(hann_samples) // 2])
 
             for i in range(int(16 / DELTA_FREQ)):
@@ -75,7 +79,7 @@ class TunerEngine:
                 if not any(tmp_hps_spec):
                     break
                 hps_spec = tmp_hps_spec
-
+            self.fft_data = hps_spec
             max_ind = np.argmax(hps_spec)
             max_freq = max_ind * (SAMPLE_FREQ / WINDOW_SIZE) / NUM_HPS
 
@@ -100,7 +104,7 @@ class TunerEngine:
             with sd.InputStream(channels=1, callback=self.audio_callback, blocksize=self.window_step,
                                 samplerate=self.sample_freq):
                 while self.running:
-                    time.sleep(0.3)
+                    time.sleep(2)
         except Exception as exc:
             print(str(exc))
 
